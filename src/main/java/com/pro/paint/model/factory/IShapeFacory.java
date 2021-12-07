@@ -1,4 +1,6 @@
-package com.pro.paint.model;
+package com.pro.paint.model.factory;
+
+import com.pro.paint.model.Shape;
 
 public interface IShapeFacory {
 

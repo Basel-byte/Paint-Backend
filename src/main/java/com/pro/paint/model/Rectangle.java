@@ -51,6 +51,10 @@ public class Rectangle extends Shape {
         this.w = w;
     }
 
+    public boolean isSelected(Point point) {
+        return point.x >= corner.x && point.x <= corner.x + l && point.y >= corner.y && point.y <= corner.y + w;
+    }
+
     public Shape clone(){
         return new Rectangle(this);
     }

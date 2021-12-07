@@ -40,6 +40,10 @@ public class Circle extends Shape {
         this.r = r;
     }
 
+    public boolean isSelected(Point point) {
+        return Math.pow(point.x - center.x, 2) + Math.pow(point.y - center.y, 2) <= Math.pow(r, 2);
+    }
+
     public Shape clone() {
          return new Circle(this);
     }

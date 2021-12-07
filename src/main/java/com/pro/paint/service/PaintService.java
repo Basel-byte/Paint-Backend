@@ -1,25 +1,22 @@
 package com.pro.paint.service;
 
 import com.pro.paint.model.*;
+import com.pro.paint.model.Rectangle;
 import com.pro.paint.model.Shape;
 import org.springframework.stereotype.Service;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
 @Service
 public class PaintService implements IService{
 
-    private List<Shape> shapes;
-    private Stack<List<Shape>> shapeStack;
+    private final Stack<List<Shape>> shapeStack;
 
     public PaintService() {
-        shapes = new ArrayList<>();
         shapeStack = new Stack<>();
-        shapeStack.push(shapes);
     }
 
     public List<Shape> getAllShapes() {
@@ -27,9 +24,12 @@ public class PaintService implements IService{
     }
 
     public Shape findShape(Point point) {
-        List<Shape> tempList = shapeStack.peek();
-        Circle circle = (Circle) tempList.get(0).;
-
+        List<Shape> shapeList = shapeStack.peek();
+        for (int i = shapeList.size() - 1; i >= 0; i--) {
+            if (shapeList.get(i).isSelected(point))
+                return shapeList.get(i);
+        }
+        return null;
     }
 
     public void addShape(Shape shape) {
@@ -39,14 +39,10 @@ public class PaintService implements IService{
     }
 
     public void deleteShape(Point point) {
-//        List<Shape> anotherList = shapeStack.peek();
-//        for (int i = anotherList.size() - 1; i >= 0; i--) {
-//            if (shape.equals(anotherList.get(i))) {
-//                anotherList.remove(i);
-//                break;
-//            }
-//        }
-//        shapeStack.push(anotherList);
+        List<Shape> anotherList = shapeStack.peek();
+        Shape shape = findShape(point);
+        anotherList.remove(shape);
+        shapeStack.push(anotherList);
     }
 
 }

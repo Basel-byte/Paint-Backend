@@ -40,6 +40,12 @@ public class LineSegment extends Shape {
         this.end = end;
     }
 
+    public boolean isSelected(Point point) {
+        double LHS = (double) (point.y - start.y) / (double) (point.x - start.x);
+        double RHS = (double) (end.y - start.y) / (double) (end.x - start.x);
+        return LHS == RHS;
+    }
+
     public Shape clone() {
         return new LineSegment(this);
     }

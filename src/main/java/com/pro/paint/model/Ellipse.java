@@ -51,6 +51,13 @@ public class Ellipse extends Shape {
         this.r2 = r2;
     }
 
+    public boolean isSelected(Point point) {
+        double term1 = Math.pow(point.x - center.x, 2) / Math.pow(r1, 2);
+        double term2 = Math.pow(point.y - center.y, 2) / Math.pow(r2, 2);
+
+        return  term1 + term2 == 1;
+    }
+
     public Shape clone() {
         return new Ellipse(this);
     }

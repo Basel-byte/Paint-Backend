@@ -1,5 +1,7 @@
 package com.pro.paint.model;
 
+import java.awt.*;
+
 public abstract class Shape {
     String name;
     String color;
@@ -45,6 +47,8 @@ public abstract class Shape {
     public void setBackgroundColor(String backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
+
+    public abstract boolean isSelected(Point point);
 
     public abstract Shape clone();
 }
