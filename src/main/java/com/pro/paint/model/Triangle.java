@@ -20,11 +20,11 @@ public class Triangle extends Shape {
         }
     }
 
-    public Triangle(String name, String color, String backgroundColor, Point vertex1, Point v2, Point vertex3) {
+    public Triangle(String name, String color, String backgroundColor, Point v1, Point v2, Point v3) {
         super(name, color, backgroundColor);
-        this.v1 = vertex1;
+        this.v1 = v1;
         this.v2 = v2;
-        this.v3 = vertex3;
+        this.v3 = v3;
     }
 
     public Point getV1() {
