@@ -11,7 +11,7 @@ public interface IService {
 
     public Shape findShape(Point point);
 
-    public void addShape(Shape shape);
+    public Shape addShape(Shape shape);
 
     public void deleteShape(Point point);
 }

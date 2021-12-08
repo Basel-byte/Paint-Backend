@@ -65,7 +65,7 @@ public class Triangle extends Shape {
         double A2 = area(v1, point, v3);
         double A3 = area(v1, v2, point);
 
-        return A == A1 + A2 + A3;
+        return A == (A1 + A2 + A3);
     }
 
     public Shape clone() {

@@ -15,6 +15,7 @@ public class ShapeFactory implements IShapeFacory {
             case "ellipse":
                 return new Ellipse();
             case "triangle":
+            case "rightTri":
                 return new Triangle();
             case "line segment":
                 return new LineSegment();
