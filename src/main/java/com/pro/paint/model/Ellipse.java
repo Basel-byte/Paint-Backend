@@ -2,22 +2,13 @@ package com.pro.paint.model;
 
 import java.awt.*;
 
-public class Ellipse extends Shape {
+public class Ellipse extends Shape implements Cloneable {
 
     Point center;
     int r1;
     int r2;
 
     public Ellipse() {
-    }
-
-    public Ellipse(Ellipse target) {
-        super(target);
-        if (target != null) {
-            this.center = target.center;
-            this.r1 = target.r1;
-            this.r2 = target.r2;
-        }
     }
 
     public Ellipse(String name, String color, String backgroundColor, Point center, int r1, int r2) {
@@ -58,7 +49,16 @@ public class Ellipse extends Shape {
         return  term1 + term2 <= 1;
     }
 
-    public Shape clone() {
-        return new Ellipse(this);
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Ellipse clonedEllipse = null;
+        try {
+            clonedEllipse = (Ellipse) super.clone();
+            clonedEllipse.setCenter((Point) this.getCenter().clone());
+        }
+        catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        return clonedEllipse;
     }
 }

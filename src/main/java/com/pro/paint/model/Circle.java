@@ -2,20 +2,12 @@ package com.pro.paint.model;
 
 import java.awt.*;
 
-public class Circle extends Shape {
+public class Circle extends Shape implements Cloneable{
 
     Point center;
     int r;
 
     public Circle() {
-    }
-
-    public Circle(Circle target) {
-        super(target);
-        if (target != null) {
-            this.center = target.center;
-            this.r = target.r;
-        }
     }
 
     public Circle(String name, String color, String backgroundColor, Point center, int r) {
@@ -44,7 +36,16 @@ public class Circle extends Shape {
         return Math.pow(point.x - center.x, 2) + Math.pow(point.y - center.y, 2) <= Math.pow(r, 2);
     }
 
-    public Shape clone() {
-         return new Circle(this);
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Circle clonedCircle = null;
+        try {
+            clonedCircle = (Circle) super.clone();
+            clonedCircle.setCenter((Point) this.getCenter().clone());
+        }
+        catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        return clonedCircle;
     }
 }

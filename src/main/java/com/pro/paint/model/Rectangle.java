@@ -11,15 +11,6 @@ public class Rectangle extends Shape {
     public Rectangle() {
     }
 
-    public Rectangle(Rectangle target) {
-        super(target);
-        if (target != null) {
-            this.corner = target.corner;
-            this.l = target.l;
-            this.w = target.w;
-        }
-    }
-
     public Rectangle(String name, String color, String backgroundColor, Point corner, int l, int w) {
         super(name, color, backgroundColor);
         this.corner = corner;
@@ -55,7 +46,16 @@ public class Rectangle extends Shape {
         return point.x >= corner.x && point.x <= corner.x + l && point.y >= corner.y && point.y <= corner.y + w;
     }
 
-    public Shape clone(){
-        return new Rectangle(this);
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Rectangle clonedRectangle = null;
+        try {
+            clonedRectangle = (Rectangle) super.clone();
+            clonedRectangle.setCorner((Point) this.getCorner().clone());
+        }
+        catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        return clonedRectangle;
     }
 }

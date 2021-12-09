@@ -10,14 +10,6 @@ public class LineSegment extends Shape {
     public LineSegment() {
     }
 
-    public LineSegment(LineSegment target) {
-        super(target);
-        if (target != null) {
-            this.start = target.start;
-            this.end = target.end;
-        }
-    }
-
     public LineSegment(String name, String color, String backgroundColor, Point start, Point end) {
         super(name, color, backgroundColor);
         this.start = start;
@@ -46,7 +38,17 @@ public class LineSegment extends Shape {
         return LHS == RHS;
     }
 
-    public Shape clone() {
-        return new LineSegment(this);
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        LineSegment clonedLineSegment = null;
+        try {
+            clonedLineSegment = (LineSegment) super.clone();
+            clonedLineSegment.setStart((Point) this.getStart().clone());
+            clonedLineSegment.setEnd((Point) this.getEnd().clone());
+        }
+        catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        return clonedLineSegment;
     }
 }

@@ -2,20 +2,12 @@ package com.pro.paint.model;
 
 import java.awt.*;
 
-public abstract class Shape {
+public abstract class Shape implements Cloneable{
     String name;
     String color;
     String backgroundColor;
 
     public Shape() {
-    }
-
-    public Shape(Shape target) {
-        if (target != null) {
-            this.name = target.name;
-            this.color = target.color;
-            this.backgroundColor = target.backgroundColor;
-        }
     }
 
     public Shape(String name, String color, String backgroundColor) {
@@ -48,7 +40,19 @@ public abstract class Shape {
         this.backgroundColor = backgroundColor;
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException{
+        Shape clonedShape = null;
+
+        try {
+            clonedShape = (Shape) super.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        return clonedShape;
+    }
+
     public abstract boolean isSelected(Point point);
 
-    public abstract Shape clone();
 }

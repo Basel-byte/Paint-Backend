@@ -11,14 +11,6 @@ public class Triangle extends Shape {
     public Triangle(){
     }
 
-    public Triangle(Triangle target) {
-        super(target);
-        if (target != null) {
-            this.v1 = target.v1;
-            this.v2 = target.v2;
-            this.v3 = target.v3;
-        }
-    }
 
     public Triangle(String name, String color, String backgroundColor, Point v1, Point v2, Point v3) {
         super(name, color, backgroundColor);
@@ -68,7 +60,18 @@ public class Triangle extends Shape {
         return A == (A1 + A2 + A3);
     }
 
-    public Shape clone() {
-        return new Triangle(this);
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Triangle clonedTriangle = null;
+        try {
+            clonedTriangle = (Triangle) super.clone();
+            clonedTriangle.setV1((Point) this.getV1().clone());
+            clonedTriangle.setV2((Point) this.getV2().clone());
+            clonedTriangle.setV3((Point) this.getV3().clone());
+        }
+        catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        return clonedTriangle;
     }
 }

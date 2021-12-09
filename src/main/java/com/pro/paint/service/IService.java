@@ -11,7 +11,11 @@ public interface IService {
 
     public Shape findShape(Point point);
 
-    public Shape addShape(Shape shape);
+    public void addShape(Shape shape) throws CloneNotSupportedException;
 
-    public void deleteShape(Point point);
+    public void deleteShape(Point point) throws CloneNotSupportedException;
+
+    public void undo();
+
+    public void redo();
 }
