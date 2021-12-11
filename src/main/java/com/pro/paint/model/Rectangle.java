@@ -43,7 +43,14 @@ public class Rectangle extends Shape {
     }
 
     public boolean isSelected(Point point) {
-        return point.x >= corner.x && point.x <= corner.x + l && point.y >= corner.y && point.y <= corner.y + w;
+        if (l > 0 && w > 0) {
+            return point.x >= corner.x && point.x <= corner.x + w && point.y >= corner.y && point.y <= corner.y + l;
+        }
+        else if (l > 0 && w < 0 )
+            return point.x <= corner.x && point.x >= corner.x + w && point.y >= corner.y && point.y <= corner.y + l;
+        else if (l < 0 && w < 0)
+            return point.x <= corner.x && point.x >= corner.x + w && point.y <= corner.y && point.y >= corner.y + l;
+        return point.x >= corner.x && point.x <= corner.x + w && point.y <= corner.y && point.y >= corner.y + l;
     }
 
     @Override

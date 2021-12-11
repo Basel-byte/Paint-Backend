@@ -1,0 +1,10 @@
+{
+  "center": {
+    "x": 1,
+    "y": 2
+  },
+  "r": 2,
+  "name": "circle",
+  "color": "red",
+  "backgroundColor": "blue"
+}

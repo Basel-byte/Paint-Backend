@@ -3,35 +3,30 @@ package com.pro.paint.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.pro.paint.model.*;
 import com.pro.paint.model.Rectangle;
 import com.pro.paint.model.Shape;
-import com.pro.paint.model.factory.IShapeFacory;
-import com.pro.paint.model.factory.ShapeFactory;
+import com.pro.paint.service.IService;
 import com.pro.paint.service.PaintService;
-import org.apache.tomcat.util.json.JSONParser;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/paint")
 public class PaintController {
 
-    private PaintService paintService;
+    private IService paintService;
     @Autowired
-    public PaintController(PaintService paintService) {
+    public PaintController(IService paintService) {
         this.paintService = paintService;
     }
 
@@ -43,7 +38,7 @@ public class PaintController {
     @PostMapping("/addShape")
     public void addShape(@RequestBody String shapeStr) throws JsonProcessingException, CloneNotSupportedException {
         String str = shapeStr.replaceAll(" ", "");
-        System.out.println(str);
+//        System.out.println(str);
         switch (str.charAt(9)) {
             case 't':
                 Triangle shape1 = new ObjectMapper().readValue(shapeStr, Triangle.class);
@@ -88,14 +83,30 @@ public class PaintController {
         paintService.deleteShape(point);
     }
 
-    @PostMapping("/undo")
+    @GetMapping("/undo")
     public void undo() {
         paintService.undo();
     }
 
-    @PostMapping("/redo")
+    @GetMapping("/redo")
     public void redo() {
         paintService.redo();
     }
+
+    @GetMapping("/saveAs/JSON")
+    public void saveAsJSON() throws IOException, CloneNotSupportedException {
+        paintService.saveAsJSON();
+    }
+
+    @GetMapping("/save")
+    public void save() throws FileNotFoundException, CloneNotSupportedException {
+        paintService.save();
+    }
+
+    @GetMapping("/open")
+    public void openJSONFile() throws FileNotFoundException {
+        paintService.openJSONFile();
+    }
+
 
 }

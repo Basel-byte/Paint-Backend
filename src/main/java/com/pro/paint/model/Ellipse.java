@@ -1,8 +1,12 @@
 package com.pro.paint.model;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 import java.awt.*;
 
+
 public class Ellipse extends Shape implements Cloneable {
+
 
     Point center;
     int r1;

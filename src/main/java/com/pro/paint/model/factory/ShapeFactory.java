@@ -17,7 +17,7 @@ public class ShapeFactory implements IShapeFacory {
             case "triangle":
             case "rightTri":
                 return new Triangle();
-            case "line segment":
+            case "line":
                 return new LineSegment();
             default:
                 return null;

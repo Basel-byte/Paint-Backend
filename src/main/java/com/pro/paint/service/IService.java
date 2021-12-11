@@ -3,6 +3,8 @@ package com.pro.paint.service;
 import com.pro.paint.model.Shape;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public interface IService {
@@ -18,4 +20,10 @@ public interface IService {
     public void undo();
 
     public void redo();
+
+    public void saveAsJSON() throws IOException, CloneNotSupportedException;
+
+    public void save() throws FileNotFoundException, CloneNotSupportedException;
+
+    public void openJSONFile() throws FileNotFoundException;
 }
